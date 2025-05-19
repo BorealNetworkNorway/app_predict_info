@@ -26,8 +26,8 @@ def show_tree_map(df):
         return
 
     df = df.dropna(subset=["tree_id", "distance", "degrees"])
-    df["x"] = df["distance"] * np.cos(df["degrees"]*PI()/200)
-    df["y"] = df["distance"] * np.sin(df["degrees"]*PI()/200)
+    df["x"] = df["distance"] * np.cos(df["degrees"]*np.pi/200)
+    df["y"] = df["distance"] * np.sin(df["degrees"]*np.pi/200)
 
     chart = alt.Chart(df).mark_circle().encode(
         x="x", y="y", tooltip=["tree_id", "species", "mean_dbh"],
