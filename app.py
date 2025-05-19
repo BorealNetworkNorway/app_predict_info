@@ -12,7 +12,7 @@ st.title("Forest Parcels Monitoring in Norway")
 data_by_plot = load_data("data/predict_tree_inventory_v3.xlsx")
 
 # 1. Display map of Norway with forest parcel markers
-st.header("\ud83d\uddfa Parcels in Norway")
+st.header("Parcels in Norway")
 map_center = [64.5, 11.0]
 forest_map = folium.Map(location=map_center, zoom_start=5)
 
