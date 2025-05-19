@@ -30,11 +30,13 @@ def show_tree_map(df):
     df["y"] = df["distance"] * np.sin(df["degrees"]*np.pi/200)
 
     chart = alt.Chart(df).mark_circle().encode(
-        x="x", y="y", tooltip=["tree_id", "species", "mean_dbh"],
+        x=alt.X("x", scale=alt.Scale(zero=False)),
+        y=alt.Y("y", scale=alt.Scale(zero=False)), 
+        tooltip=["tree_id", "species", "mean_dbh"],
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
         color=alt.Color("species:N")
     ).interactive().properties(width=700, height=500)
-
+ 
     st.altair_chart(chart)
 
 def get_tree_info(df, tree_id):
