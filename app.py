@@ -6,7 +6,7 @@ from streamlit_folium import st_folium
 from utils import load_data, get_plot_coordinates, show_tree_map, get_tree_info
 
 st.set_page_config(layout="wide", page_title="Forest Monitoring")
-st.title("\ud83c\udf33 Forest Parcels Monitoring in Norway")
+st.title("Forest Parcels Monitoring in Norway")
 
 # Load data
 data_by_plot = load_data("data/predict_tree_inventory_v3.xlsx")
@@ -30,17 +30,17 @@ for plot_id, df in data_by_plot.items():
 plot_selection = st_folium(forest_map, width=900, height=500)
 
 # 2. User selects a plot manually or from the map
-st.sidebar.title("\ud83d\udcc2 Select a Plot")
+st.sidebar.title("Select a Plot")
 all_plots = list(data_by_plot.keys())
 selected_plot = st.sidebar.selectbox("Choose a plot:", all_plots)
 df_plot = data_by_plot[selected_plot]
 
 # 3. Display tree distribution in the plot
-st.subheader(f"\ud83c\udf33 Plot {selected_plot} - Tree Layout")
+st.subheader(f"Plot {selected_plot} - Tree Layout")
 show_tree_map(df_plot)
 
 # 4. Tree search bar
-st.sidebar.title("\ud83d\udd0d Search Tree")
+st.sidebar.title("Search Tree")
 tree_id = st.sidebar.text_input("Enter tree_ID")
 if tree_id:
     result = get_tree_info(df_plot, tree_id)
