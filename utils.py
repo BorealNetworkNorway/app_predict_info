@@ -41,7 +41,7 @@ def show_tree_map(df):
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
         color=alt.Color("species:N")
     ).properties(
-        width=500,
+        width=700,
         height=500
     )
 
