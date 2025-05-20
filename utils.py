@@ -29,15 +29,10 @@ def show_tree_map(df):
     df["x"] = df["distance"] * np.cos(df["degrees"] * np.pi / 200)
     df["y"] = df["distance"] * np.sin(df["degrees"] * np.pi / 200)
 
-    # Déterminer une échelle carrée (même min/max pour x et y)
-    min_x, max_x = df["x"].min(), df["x"].max()
-    min_y, max_y = df["y"].min(), df["y"].max()
-    min_val = min(min_x, min_y)
-    max_val = max(max_x, max_y)
 
     # Appliquer le même domaine pour x et y
-    x_axis = alt.X("x", scale=alt.Scale(domain=[min_val, max_val]))
-    y_axis = alt.Y("y", scale=alt.Scale(domain=[min_val, max_val]))
+    x_axis = alt.X("x", scale=alt.Scale(domain=[-18, 18]))
+    y_axis = alt.Y("y", scale=alt.Scale(domain=[-18, 18]))
 
     chart = alt.Chart(df).mark_circle().encode(
         x=x_axis,
