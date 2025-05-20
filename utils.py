@@ -26,22 +26,34 @@ def show_tree_map(df):
         return
 
     df = df.dropna(subset=["tree_id", "distance", "degrees"])
-    df["x"] = df["distance"] * np.cos(df["degrees"]*np.pi/200)
-    df["y"] = df["distance"] * np.sin(df["degrees"]*np.pi/200)
+    df["x"] = df["distance"] * np.cos(df["degrees"] * np.pi / 200)
+    df["y"] = df["distance"] * np.sin(df["degrees"] * np.pi / 200)
 
-    # Trouver les limites communes
-    min_val = min(df["x"].min(), df["y"].min())
-    max_val = max(df["x"].max(), df["y"].max())
+    # Étendre le domaine pour rendre le graphique parfaitement carré
+    min_x, max_x = df["x"].min(), df["x"].max()
+    min_y, max_y = df["y"].min(), df["y"].max()
+    min_val = min(min_x, min_y)
+    max_val = max(max_x, max_y)
+
+    # Appliquer même domaine aux deux axes
+    x_axis = alt.X("x", scale=alt.Scale(domain=[min_val, max_val]))
+    y_axis = alt.Y("y", scale=alt.Scale(domain=[min_val, max_val]))
 
     chart = alt.Chart(df).mark_circle().encode(
-        x=alt.X("x", scale=alt.Scale(domain=[min_val, max_val])),
-        y=alt.Y("y", scale=alt.Scale(domain=[min_val, max_val])),
+        x=x_axis,
+        y=y_axis,
         tooltip=["tree_id", "species", "mean_dbh"],
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
         color=alt.Color("species:N")
-    ).properties(width=500, height=500)
+    ).properties(
+        width=500,
+        height=500
+    ).configure_view(
+        preserveAspectRatio=True  # Ce paramètre est crucial
+    )
 
-    st.altair_chart(chart)
+    st.altair_chart(chart, use_container_width=False)
+
 
 def get_tree_info(df, tree_id):
     match = df[df["tree_id"].astype(str) == tree_id]
