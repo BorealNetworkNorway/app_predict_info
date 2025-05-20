@@ -35,7 +35,7 @@ def show_tree_map(df):
         tooltip=["tree_id", "species", "mean_dbh"],
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
         color=alt.Color("species:N")
-    ).interactive().properties(width=700, height=500)
+    ).interactive().properties(width=500, height=500)
  
     st.altair_chart(chart)
 
