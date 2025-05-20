@@ -29,14 +29,18 @@ def show_tree_map(df):
     df["x"] = df["distance"] * np.cos(df["degrees"]*np.pi/200)
     df["y"] = df["distance"] * np.sin(df["degrees"]*np.pi/200)
 
+    # Trouver les limites communes
+    min_val = min(df["x"].min(), df["y"].min())
+    max_val = max(df["x"].max(), df["y"].max())
+
     chart = alt.Chart(df).mark_circle().encode(
-        x=alt.X("x", scale=alt.Scale(zero=False)),
-        y=alt.Y("y", scale=alt.Scale(zero=False)), 
+        x=alt.X("x", scale=alt.Scale(domain=[min_val, max_val])),
+        y=alt.Y("y", scale=alt.Scale(domain=[min_val, max_val])),
         tooltip=["tree_id", "species", "mean_dbh"],
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
         color=alt.Color("species:N")
-    ).interactive().properties(width=500, height=500)
- 
+    ).properties(width=500, height=500)
+
     st.altair_chart(chart)
 
 def get_tree_info(df, tree_id):
