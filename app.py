@@ -25,12 +25,17 @@ for plot_id, df in data_by_plot.items():
     coords = df["coordinates"].iloc[0]
     if coords:
         lat, lon = map(float, coords.split(","))
-        color = "blue"
-        folium.Marker(
-            location=[lat, lon],
+        folium.map.Marker(
+            [lat, lon],
+            icon=folium.DivIcon(
+                html=f"""
+                    <div style="font-size: 12px; color: white; background-color: red; border-radius: 4px; padding: 2px 4px;">
+                        {plot_id}
+                    </div>
+                """
+            ),
             tooltip=f"Plot {plot_id}: {loc}",
-            popup=f"Click to view plot {plot_id}",
-            icon=folium.Icon(color=color)
+            popup=f"Click to view plot {plot_id}"
         ).add_to(forest_map)
        
 
