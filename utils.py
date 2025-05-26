@@ -33,10 +33,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     df["y"] = df["distance"] * np.sin(df["degrees"] * np.pi / 200)
     #I divided by 200 cause the compas was with 400°. 
     df["mean_dbh"] = pd.to_numeric(df["mean_dbh"], errors="coerce")
-    df = df.dropna(subset=["mean_dbh"])  # supprime les lignes avec NaN dans mean_dbh
-
-    st.write("Colonnes disponibles dans le DataFrame :", df.columns.tolist())
-    st.write("Aperçu du DataFrame :", df.head())
+    df = df.dropna(subset=["mean_dbh"])
     
     base = alt.Chart(df).encode(
         x=alt.X("x", scale=alt.Scale(domain=[-20, 20])),
@@ -47,7 +44,6 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     species_layer = base.mark_circle().encode(
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
     )
-
 
     if show_labels:
         text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
