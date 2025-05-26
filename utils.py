@@ -34,7 +34,6 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     #I divided by 200 cause the compas was with 400°. 
 
     df["has_dendrometer"] = df["dendrometer_id"].notna()
-
     
     base = alt.Chart(df).encode(
         x=alt.X("x", scale=alt.Scale(domain=[-20, 20])),
@@ -66,7 +65,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     # Dendrometer listing
     dendros = df[df["has_dendrometer"]][["tree_id", "dendrometer_id"]]
     if not dendros.empty:
-        st.markdown("### Trees with Dendrometers")
+        st.markdown("Trees with Dendrometers")
         st.dataframe(dendros)
 
 def get_tree_info(df, tree_id):
