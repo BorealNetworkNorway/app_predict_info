@@ -24,12 +24,20 @@ for plot_id, df in data_by_plot.items():
     loc = df["location"].iloc[0]
     coords = df["coordinates"].iloc[0]
     if coords:
-        lat, lon = map(float, coords.split(","))
-        folium.Marker(
-            location=[lat, lon],
-            tooltip=f"Plot {plot_id}: {loc}",
-            popup=f"Click to view Plot {plot_id}"
-        ).add_to(forest_map)
+        try:
+            lat, lon = map(float, coords.split(","))
+            # If plot selected, draw it in red 
+            color = "red" if plot_id == selected_plot else "blue"
+
+            folium.Marker(
+                location=[lat, lon],
+                tooltip=f"Plot {plot_id}: {loc}",
+                popup=f"Click to view plot {plot_id}",
+                icon=folium.Icon(color=color)
+            ).add_to(forest_map)
+        except Exception as e:
+            st.warning(f"Plot {plot_id} has unvalid coordinates.")
+
 
 map_response = st_folium(forest_map, width=1000, height=600)
 
