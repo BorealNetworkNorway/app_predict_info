@@ -1,4 +1,6 @@
 # app.py
+
+#Import
 import streamlit as st
 import pandas as pd
 import folium
@@ -6,13 +8,15 @@ from streamlit_folium import st_folium
 from utils import load_data, get_plot_coordinates, show_tree_map, get_tree_info
 
 st.set_page_config(layout="wide", page_title="Forest Monitoring")
-st.title("Forest Parcels Monitoring in Norway")
+st.title("Predict Project - Forest Plots")
 
 # Load data
 data_by_plot = load_data("data/predict_tree_inventory_v3.xlsx")
 
-# 1. Display map of Norway with forest parcel markers
-st.header("Parcels in Norway")
+#####################################################
+# 1. Display map of Norway with forest parcel markers 
+#####################################################
+st.header("Map of the plots in Norway")
 map_center = [64.5, 11.0]
 forest_map = folium.Map(location=map_center, zoom_start=5)
 
@@ -27,21 +31,36 @@ for plot_id, df in data_by_plot.items():
             popup=f"Click to view Plot {plot_id}"
         ).add_to(forest_map)
 
-plot_selection = st_folium(forest_map, width=900, height=500)
+map_response = st_folium(forest_map, width=900, height=500)
 
-# 2. User selects a plot manually or from the map
-st.sidebar.title("Select a Plot")
-all_plots = list(data_by_plot.keys())
-selected_plot = st.sidebar.selectbox("Choose a plot:", all_plots)
+# Detect plot click from map
+selected_plot = None
+if map_response.get("last_object_clicked_tooltip"):
+    tooltip = map_response["last_object_clicked_tooltip"]
+    selected_plot = tooltip.split()[1]
+
+# Fallback: manual selection
+if not selected_plot:
+    st.sidebar.title("Select a Plot")
+    all_plots = list(data_by_plot.keys())
+    selected_plot = st.sidebar.selectbox("Choose a plot:", all_plots)
+
 df_plot = data_by_plot[selected_plot]
 
-# 3. Display tree distribution in the plot
-st.subheader(f"Plot {selected_plot} - Tree Layout")
-show_tree_map(df_plot)
+# Options
+with st.expander("Plot View Options", expanded=True):
+    show_dendros = st.checkbox("Dendrometers Trees", value=True)
+    show_labels = st.checkbox("Tree IDs", value=False)
+    st.download_button("Download Plot as Image", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
+
+# Display plot
+title = f"Plot {selected_plot} - Tree Layout -  ({df_plot['location'].iloc[0]})"
+st.subheader(title)
+show_tree_map(df_plot, show_dendrometers=show_dendros, show_labels=show_labels)
 
 # 4. Tree search bar
 st.sidebar.title("Search Tree")
-tree_id = st.sidebar.text_input("Enter tree_ID")
+tree_id = st.sidebar.text_input("Enter tree_ID, pleaaaase")
 if tree_id:
     result = get_tree_info(df_plot, tree_id)
     st.sidebar.markdown("---")
