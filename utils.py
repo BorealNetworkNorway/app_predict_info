@@ -39,7 +39,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     base = alt.Chart(df).encode(
         x=alt.X("x", scale=alt.Scale(domain=[-20, 20])),
         y=alt.Y("y", scale=alt.Scale(domain=[-20, 20])),
-        tooltip=["tree_id", "species", "mean_dbh", "dendrometer_ID"]
+        tooltip=["tree_id", "species", "mean_dbh", "dendrometer_id"]
     )
 
     species_layer = base.mark_circle().encode(
