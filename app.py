@@ -25,10 +25,7 @@ for plot_id, df in data_by_plot.items():
     coords = df["coordinates"].iloc[0]
     if coords:
         lat, lon = map(float, coords.split(","))
-            
-        # If plot selected, draw it in red 
         color = "blue"
-
         folium.Marker(
             location=[lat, lon],
             tooltip=f"Plot {plot_id}: {loc}",
@@ -71,14 +68,15 @@ for plot_id, df in data_by_plot.items():
         lat, lon = map(float, coords.split(","))
             
         # If plot selected, draw it in red 
-        color = "red" if plot_id == selected_plot else "blue"
+        if plot_id == selected_plot 
+            color = "red" 
 
-        folium.Marker(
-            location=[lat, lon],
-            tooltip=f"Plot {plot_id}: {loc}",
-            popup=f"Click to view plot {plot_id}",
-            icon=folium.Icon(color=color)
-        ).add_to(forest_map)
+            folium.Marker(
+                location=[lat, lon],
+                tooltip=f"Plot {plot_id}: {loc}",
+                popup=f"Click to view plot {plot_id}",
+                icon=folium.Icon(color=color)
+            ).add_to(forest_map)
        
 
 # Data loading
