@@ -27,6 +27,8 @@ st.header("Map of the plots in Norway")
 map_center = [62.5, 11.0]
 forest_map = folium.Map(location=map_center, zoom_start=6)
 
+selected_plot = 0
+
 # Add one marker per plot 
 for plot_id, df in data_by_plot.items():
     loc = df["location"].iloc[0]
