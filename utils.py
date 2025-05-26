@@ -51,9 +51,10 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         color=alt.Color("species:N")
     )
 
-    origin_layer = base.mark_point(
-                    shape='cross', size=200, color='red'
-    ).encode(x=[0], y=[0])
+   origin_layer = alt.Chart(pd.DataFrame({'x': [0], 'y': [0]})
+                ).mark_point(shape='cross',size=200,color='red'
+                ).encode(x='x:Q', y='y:Q'
+                )
     
     if show_labels:
         text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
