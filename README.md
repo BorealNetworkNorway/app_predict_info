@@ -88,9 +88,4 @@ Each sheet = one plot.
 ---
 
 ## 📜 License
-
-This project is licensed under the MIT License. See `LICENSE` for details.
-
----
-
-Let me know if you'd like me to save this into a `README.md` file for your project!
+...
