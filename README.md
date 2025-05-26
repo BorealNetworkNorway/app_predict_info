@@ -2,7 +2,7 @@
 
 An quick application built with **Streamlit**, **Folium**, and **Altair** to visualize the different forest plots as part of the **PREDICT project**.
 ---
-
+https://apppredictplots.streamlit.app/ 
 
 ### 🌍 Map of Norway (Folium)
 * Displays all forest plots.
