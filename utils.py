@@ -5,6 +5,8 @@ import pandas as pd
 import altair as alt
 import streamlit as st
 import numpy as np
+import io 
+import base64
 
 #Loading of data 
 def load_data(excel_path):
@@ -64,6 +66,10 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     ).interactive()
 
     st.altair_chart(chart, use_container_width=False)
+
+    download_link = get_chart_download_link(chart)
+    if download_link:
+        st.markdown(download_link, unsafe_allow_html=True)
 
 def get_tree_info(df, tree_id):
     match = df[df["tree_id"].astype(str) == tree_id]
