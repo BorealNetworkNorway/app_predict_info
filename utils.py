@@ -51,15 +51,19 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         color=alt.Color("species:N")
     )
 
+    origin_layer = alt.Chart(pd.DataFrame({'x': [0], 'y': [0]})).mark_point(
+                    shape='cross', size=200, color='red'
+    ).encode(x='x', y='y')
+    
     if show_labels:
         text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
-        chart = (species_layer + text_layer).properties(
+        chart = (species_layer + text_layer + origin_layer).properties(
         width=1000, height=1000, title=f"Tree Layout - {df['location'].iloc[0]}"
     ).configure_legend(
         orient="right"
     ).interactive()
     else:
-        chart = species_layer.properties(
+        chart = (species_layer + origin_layer).properties(
         width=1000, height=1000, title=f"Tree Layout - {df['location'].iloc[0]}"
     ).configure_legend(
         orient="right"
