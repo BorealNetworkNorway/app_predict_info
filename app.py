@@ -34,20 +34,33 @@ for plot_id, df in data_by_plot.items():
 map_response = st_folium(forest_map, width=900, height=500)
 
 # Detect plot click from map
+
 st.sidebar.title("Select a Plot")
 
-# Dropdown always visible
+# Dropdown visible en permanence
 all_plots = list(data_by_plot.keys())
 dropdown_plot = st.sidebar.selectbox("Choose a plot manually:", all_plots)
 
-# Check if user clicked on the map
+# Si clic sur la carte, on extrait le plot_id
 clicked_plot = None
 if map_response.get("last_object_clicked_tooltip"):
     tooltip = map_response["last_object_clicked_tooltip"]
-    clicked_plot = tooltip.split()[1]
+    try:
+        clicked_plot = tooltip.split()[1]
+        if clicked_plot not in all_plots:
+            clicked_plot = None
+    except:
+        clicked_plot = None
 
-# Use map click if available, otherwise dropdown
+# Choix final du plot
 selected_plot = clicked_plot if clicked_plot else dropdown_plot
+
+# ⚠️ Sécurité : vérifie bien que la clé existe
+if selected_plot not in data_by_plot:
+    st.error(f"Selected plot '{selected_plot}' not found in data.")
+    st.stop()
+
+# Charge les données du plot sélectionné
 df_plot = data_by_plot[selected_plot]
 
 # Options
