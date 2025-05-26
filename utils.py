@@ -48,9 +48,12 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
     )
 
-    text_layer = base.mark_text(align="center", dy=-10).encode(
-        text="tree_id:N"
-    ) if show_labels else alt.Chart(pd.DataFrame())
+
+    if show_labels:
+        text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
+        chart = (species_layer + text_layer)
+    else:
+        chart = species_layer
 
     chart = (species_layer + text_layer).properties(
         width=600, height=600, title=f"Tree Layout - {df['location'].iloc[0]}"
