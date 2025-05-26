@@ -33,12 +33,12 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     df["y"] = df["distance"] * np.sin(df["degrees"] * np.pi / 200)
     #I divided by 200 cause the compas was with 400°. 
 
-    df["has_dendrometer"] = df["dendrometer_ID"].notna()
+    df["has_dendrometer"] = df["dendrometer_id"].notna()
     
     base = alt.Chart(df).encode(
         x=alt.X("x", scale=alt.Scale(domain=[-20, 20])),
         y=alt.Y("y", scale=alt.Scale(domain=[-20, 20])),
-        tooltip=["tree_id", "species", "mean_dbh", "dendrometer_ID"]
+        tooltip=["tree_id", "species", "mean_dbh", "dendrometer_id"]
     )
 
     species_layer = base.mark_circle().encode(
@@ -63,7 +63,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     st.altair_chart(chart, use_container_width=True)
 
     # Dendrometer listing
-    dendros = df[df["has_dendrometer"]][["tree_id", "dendrometer_ID"]]
+    dendros = df[df["has_dendrometer"]][["tree_id", "dendrometer_id"]]
     if not dendros.empty:
         st.markdown("Trees with Dendrometers")
         st.dataframe(dendros)
