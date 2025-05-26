@@ -23,7 +23,7 @@ def get_plot_coordinates(df):
         return list(map(float, coords.split(",")))
     return None
 
-def show_tree_map(df):
+def show_tree_map(df, show_dendrometers=False, show_labels=False):
     if not {"tree_id", "mean_dbh", "distance", "degrees", "species"}.issubset(df.columns):
         st.warning("Some columns are missing.")
         return
