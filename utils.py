@@ -33,13 +33,13 @@ def show_tree_map(df):
     df["y"] = df["distance"] * np.sin(df["degrees"] * np.pi / 200)
     #I divided by 200 cause the compas was with 400°. 
 
-    df["has_dendrometer"] = df["dendrometer_id"].notna()
+    df["has_dendrometer"] = df["dendrometer_ID"].notna()
 
     
     base = alt.Chart(df).encode(
         x=alt.X("x", scale=alt.Scale(domain=[-20, 20])),
         y=alt.Y("y", scale=alt.Scale(domain=[-20, 20])),
-        tooltip=["tree_id", "species", "mean_dbh", "dendrometer_id"]
+        tooltip=["tree_id", "species", "mean_dbh", "dendrometer_ID"]
     )
 
     species_layer = base.mark_circle().encode(
