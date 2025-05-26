@@ -71,7 +71,7 @@ with st.expander("Plot View Options", expanded=True):
 
 
 if "dendrometer_id" not in df_plot.columns:
-    st.error("La colonne 'dendrometer_ID' est absente ! Voici les colonnes disponibles :")
+    st.error("La colonne 'dendrometer_id' est absente ! Voici les colonnes disponibles :")
     st.write(df_plot.columns.tolist())
 
 # Display plot
