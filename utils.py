@@ -50,11 +50,11 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
         color=alt.Color("species:N")
     )
-
-   origin_layer = alt.Chart(pd.DataFrame({'x': [0], 'y': [0]})
-                ).mark_point(shape='cross',size=200,color='red'
-                ).encode(x='x:Q', y='y:Q'
-                )
+    
+    origin_layer = alt.Chart(pd.DataFrame({'x': [0], 'y': [0]})
+                            ).mark_point(shape='cross',size=200,color='red'
+                                        ).encode(x='x:Q', y='y:Q'
+    )
     
     if show_labels:
         text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
