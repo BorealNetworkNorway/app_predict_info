@@ -68,7 +68,7 @@ for plot_id, df in data_by_plot.items():
         lat, lon = map(float, coords.split(","))
             
         # If plot selected, draw it in red 
-        if plot_id == selected_plot 
+        if plot_id == selected_plot: 
             color = "red" 
 
             folium.Marker(
