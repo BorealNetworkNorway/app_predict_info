@@ -83,7 +83,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         
     else:
         chart = (species_layer + origin_layer).properties(
-        width=1000, height=1000, title=f"Tree Layout - {df['location'].iloc[0]}"
+        width=1000, height=1000, title=f"Plot probably full of rocks and roots"
     ).configure_legend(
         orient="right"
     ).interactive()
