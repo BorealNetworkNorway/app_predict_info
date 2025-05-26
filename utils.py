@@ -51,11 +51,13 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
 
     if show_labels:
         text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
-        chart = (species_layer + text_layer)
+        chart = (species_layer + text_layer).properties(
+        width=600, height=600, title=f"Tree Layout - {df['location'].iloc[0]}"
+    ).configure_legend(
+        orient="right"
+    ).interactive()
     else:
-        chart = species_layer
-
-    chart = (species_layer + text_layer).properties(
+        chart = species_layer.properties(
         width=600, height=600, title=f"Tree Layout - {df['location'].iloc[0]}"
     ).configure_legend(
         orient="right"
