@@ -51,7 +51,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         color=alt.Color("species:N")
     )
 
-    origin_layer = alt.mark_point(
+    origin_layer = base.mark_point(
                     shape='cross', size=200, color='red'
     ).encode(x=[0], y=[0])
     
