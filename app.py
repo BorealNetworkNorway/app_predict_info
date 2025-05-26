@@ -61,6 +61,13 @@ if selected_plot not in data_by_plot:
 # Data loading
 df_plot = data_by_plot[selected_plot]
 
+dendro_trees = df_plot[df_plot.get("dendrometer_id").notna()]["tree_id"].tolist()
+if dendro_trees:
+    st.markdown(f"**Arbres avec dendromètre dans ce plot :** {', '.join(map(str, dendro_trees))}")
+else:
+    st.markdown("*Aucun arbre avec dendromètre pour ce plot.*")
+
+
 # Options
 with st.expander("Plot View Options", expanded=True):
     show_labels = st.checkbox("Tree IDs", value=False)
