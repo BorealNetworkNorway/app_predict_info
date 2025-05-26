@@ -9,7 +9,7 @@ st.set_page_config(layout="wide", page_title="Forest Monitoring")
 st.title("Forest Parcels Monitoring in Norway")
 
 # Load data
-data_by_plot = load_data("data/predict_tree_inventory_v4.xlsx")
+data_by_plot = load_data("data/predict_tree_inventory_v3.xlsx")
 
 # 1. Display map of Norway with forest parcel markers
 st.header("Parcels in Norway")
