@@ -70,3 +70,14 @@ def get_tree_info(df, tree_id):
     if not match.empty:
         return match.iloc[0].to_frame().rename(columns={0: "value"})
     return None
+
+def get_chart_download_link(chart, filename="chart.png"):
+    try:
+        import vl_convert as vlc
+        img_bytes = vlc.vegalite_to_image(chart.to_dict(), format="png")
+        b64 = base64.b64encode(img_bytes).decode()
+        href = f'<a href="data:image/png;base64,{b64}" download="{filename}">📷 Télécharger l\'image</a>'
+        return href
+    except Exception as e:
+        st.error(f"Erreur de génération d'image : {e}")
+        return None
