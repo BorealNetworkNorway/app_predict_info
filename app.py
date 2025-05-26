@@ -35,7 +35,7 @@ for plot_id, df in data_by_plot.items():
         lat, lon = map(float, coords.split(","))    # convert the coordinates to float
         folium.map.Marker( [lat, lon],
             icon=folium.DivIcon( html=f"""
-                    <div style="font-size: 9 px;font-weight: bold; color: white; background-color: purple; border-radius: 4px; padding: 4px 5px; text-align: left; position: relative;">
+                    <div style="font-size: 9px;font-weight: bold; color: white; background-color: purple; border-radius: 4px; padding: 4px 5px; text-align: left; position: relative;">
                         {plot_id}
                     </div> """
             ),
