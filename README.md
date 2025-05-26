@@ -28,6 +28,7 @@ An quick application built with **Streamlit**, **Folium**, and **Altair** to vis
 ---
 
 ## 🗂 Project Infrastructure
+```
 predictmaps/
 │
 ├── app.py
@@ -46,15 +47,9 @@ predictmaps/
 ```bash
 pip install -r requirements.txt
 ```
-
-### Run the Streamlit app
-
-```bash
-streamlit run app.py
-```
 ---
 
-## 📦 `requirements.txt`
+#### 📦 `requirements.txt`
 These are the required libraries:
 ```txt
 streamlit>=1.33.0
@@ -62,7 +57,15 @@ pandas>=2.0.0
 numpy
 folium
 streamlit-folium
-altair>=5.0
+altair>=5.0#
+```
+
+# Run the Streamlit app
+
+```bash
+streamlit run app.py
+```
+---
 
 
 ## 💡 Customization | DATA 
