@@ -66,7 +66,7 @@ if dendro_trees:
     st.sidebar.markdown(f"**Dendrometer trees :** ")
     st.sidebar.markdown(f"{', '.join(map(str, dendro_trees))}")
 else:
-    st.markdown("*No dendrometers recorded for now*")
+    st.sidebar.markdown("*No dendrometers recorded for now :(*")
 
 
 # Options
