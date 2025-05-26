@@ -67,9 +67,6 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
 
     st.altair_chart(chart, use_container_width=False)
 
-    download_link = get_chart_download_link(chart)
-    if download_link:
-        st.markdown(download_link, unsafe_allow_html=True)
 
 def get_tree_info(df, tree_id):
     match = df[df["tree_id"].astype(str) == tree_id]
@@ -77,13 +74,3 @@ def get_tree_info(df, tree_id):
         return match.iloc[0].to_frame().rename(columns={0: "value"})
     return None
 
-def get_chart_download_link(chart, filename="chart.png"):
-    try:
-        import vl_convert as vlc
-        img_bytes = vlc.vegalite_to_image(chart.to_dict(), format="png")
-        b64 = base64.b64encode(img_bytes).decode()
-        href = f'<a href="data:image/png;base64,{b64}" download="{filename}">📷 Télécharger l\'image</a>'
-        return href
-    except Exception as e:
-        st.error(f"Erreur de génération d'image : {e}")
-        return None
