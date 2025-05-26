@@ -65,7 +65,7 @@ df_plot = data_by_plot[selected_plot]
 
 # Options
 with st.expander("Plot View Options", expanded=True):
-    show_dendros = st.checkbox("Dendrometers Trees", value=True)
+    show_dendros = st.checkbox("Dendrometers Trees", value=False)
     show_labels = st.checkbox("Tree IDs", value=False)
     st.download_button("Download Plot as Image", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
 
