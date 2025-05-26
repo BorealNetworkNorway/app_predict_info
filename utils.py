@@ -32,8 +32,13 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     df["x"] = df["distance"] * np.cos(df["degrees"] * np.pi / 200)
     df["y"] = df["distance"] * np.sin(df["degrees"] * np.pi / 200)
     #I divided by 200 cause the compas was with 400°. 
+    df["mean_dbh"] = pd.to_numeric(df["mean_dbh"], errors="coerce")
+    df = df.dropna(subset=["mean_dbh"])  # supprime les lignes avec NaN dans mean_dbh
 
     #df["has_dendrometer"] = df["dendrometer_id"].notna()
+
+    st.write("Colonnes disponibles dans le DataFrame :", df.columns.tolist())
+    st.write("Aperçu du DataFrame :", df.head())
     
     base = alt.Chart(df).encode(
         x=alt.X("x", scale=alt.Scale(domain=[-20, 20])),
@@ -63,10 +68,10 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     st.altair_chart(chart, use_container_width=True)
 
     # Dendrometer listing
-    dendros = df[df["has_dendrometer"]][["tree_id", "dendrometer_id"]]
-    if not dendros.empty:
-        st.markdown("Trees with Dendrometers")
-        st.dataframe(dendros)
+    #dendros = df[df["has_dendrometer"]][["tree_id", "dendrometer_id"]]
+    #if not dendros.empty:
+        #st.markdown("Trees with Dendrometers")
+        #st.dataframe(dendros)
 
 def get_tree_info(df, tree_id):
     match = df[df["tree_id"].astype(str) == tree_id]
