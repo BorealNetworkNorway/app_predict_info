@@ -29,7 +29,7 @@ for plot_id, df in data_by_plot.items():
             [lat, lon],
             icon=folium.DivIcon(
                 html=f"""
-                    <div style="font-size: 12px; color: white; background-color: blue; border-radius: 4px; padding: 2px 8px;">
+                    <div style="font-size: 12px; color: white; background-color: blue; border-radius: 4px; padding: 2px 4px; text-align: center;  transform: translate(-50%, -50%); position: relative; width: auto;">
                         {plot_id}
                     </div>
                 """
