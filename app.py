@@ -66,7 +66,7 @@ df_plot = data_by_plot[selected_plot]
 # Options
 with st.expander("Plot View Options", expanded=True):
     show_labels = st.checkbox("Tree IDs", value=False)
-    st.download_button("Download Plot as Image", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
+    st.download_button("Download plot as csv", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
 
 
 # Display plot
