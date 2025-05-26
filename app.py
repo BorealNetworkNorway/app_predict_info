@@ -44,7 +44,7 @@ for plot_id, df in data_by_plot.items():
         ).add_to(forest_map)
        
 # Display the folium map
-map_response = st_folium(forest_map, width=1000, height=600)
+map_response = st_folium(forest_map,  use_container_width=True, height=600)
 
 
 
