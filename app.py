@@ -29,20 +29,35 @@ forest_map = folium.Map(location=map_center, zoom_start=6)
 
 # Add one marker per plot 
 for plot_id, df in data_by_plot.items():
-    loc = df["location"].iloc[0]                    # Location name 
-    coords = df["coordinates"].iloc[0]              # Coordinates string
+    loc = df["location"].iloc[0]
+    coords = df["coordinates"].iloc[0]
     if coords:
-        lat, lon = map(float, coords.split(","))    # convert the coordinates to float
-        folium.map.Marker( [lat, lon],
-            icon=folium.DivIcon( html=f"""
-                    <div style="font-size: 9px;font-weight: bold; color: white; background-color: purple; border-radius: 4px; padding: 4px 5px; text-align: left; position: relative;">
-                        {plot_id}
-                    </div> """
-            ),
-            tooltip=f"Plot {plot_id}: {loc}",
-            popup=f"Click to view plot {plot_id}"
-        ).add_to(forest_map)
-       
+        lat, lon = map(float, coords.split(",")) # convert the coordinates to float
+        if plot_id == selected_plot:
+            # Red marker for selected plot
+            folium.Marker(
+                location=[lat, lon],
+                tooltip=f"Plot {plot_id}: {loc}",
+                popup=f"Click to view plot {plot_id}",
+                icon=folium.Icon(color="red")
+            ).add_to(forest_map)
+        else:
+            # Label marker for other plots
+            folium.map.Marker(
+                [lat, lon],
+                icon=folium.DivIcon(
+                    html=f"""
+                        <div style="font-size: 9px; font-weight: bold; color: white;
+                                    background-color: purple; border-radius: 4px;
+                                    padding: 4px 5px; text-align: left; position: relative; left: -4px;">
+                            {plot_id}
+                        </div>
+                    """
+                ),
+                tooltip=f"Plot {plot_id}: {loc}",
+                popup=f"Click to view plot {plot_id}"
+            ).add_to(forest_map)
+
 # Display the folium map
 map_response = st_folium(forest_map,  use_container_width=True, height=600)
 
@@ -75,26 +90,6 @@ selected_plot = clicked_plot if clicked_plot else dropdown_plot
 if selected_plot not in data_by_plot:
     st.error(f"Selected plot '{selected_plot}' not found in data.")
     st.stop()
-
-
-#####################################################
-# Highlight selected plot in red on the map
-#####################################################
-for plot_id, df in data_by_plot.items():
-    loc = df["location"].iloc[0]
-    coords = df["coordinates"].iloc[0]
-    if coords:
-        lat, lon = map(float, coords.split(","))
-        # If plot selected, draw it in red 
-        if plot_id == selected_plot : 
-            color = "red" 
-            folium.Marker(
-                location=[lat, lon],
-                tooltip=f"Plot {plot_id}: {loc}",
-                popup=f"Click to view plot {plot_id}",
-                icon=folium.Icon(color=color)
-            ).add_to(forest_map)
-map_response = st_folium(forest_map, width=1000, height=600)
 
 
 #####################################################
