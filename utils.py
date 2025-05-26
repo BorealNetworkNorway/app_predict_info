@@ -35,8 +35,6 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     df["mean_dbh"] = pd.to_numeric(df["mean_dbh"], errors="coerce")
     df = df.dropna(subset=["mean_dbh"])  # supprime les lignes avec NaN dans mean_dbh
 
-    #df["has_dendrometer"] = df["dendrometer_id"].notna()
-
     st.write("Colonnes disponibles dans le DataFrame :", df.columns.tolist())
     st.write("Aperçu du DataFrame :", df.head())
     
@@ -48,11 +46,6 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
 
     species_layer = base.mark_circle().encode(
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
-        #color=alt.condition(
-            #alt.Color("species:N")
-            #show_dendrometers,
-            #alt.condition("datum.has_dendrometer", alt.value("orange"), alt.Color("species:N")),
-        #)
     )
 
     text_layer = base.mark_text(align="center", dy=-10).encode(
@@ -66,12 +59,6 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     ).interactive()
 
     st.altair_chart(chart, use_container_width=True)
-
-    # Dendrometer listing
-    #dendros = df[df["has_dendrometer"]][["tree_id", "dendrometer_id"]]
-    #if not dendros.empty:
-        #st.markdown("Trees with Dendrometers")
-        #st.dataframe(dendros)
 
 def get_tree_info(df, tree_id):
     match = df[df["tree_id"].astype(str) == tree_id]
