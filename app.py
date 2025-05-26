@@ -116,7 +116,7 @@ else:
 #####################################################
 # Display selected plot
 ####################################################
-title = f"Plot {selected_plot} - Tree Layout -  ({df_plot['location'].iloc[0]})"
+title = f"Plot {selected_plot} - ({df_plot['location'].iloc[0]})"
 st.subheader(title)
 show_tree_map(df_plot, show_labels=show_labels)
 
