@@ -29,20 +29,24 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         return
 
     df = df.dropna(subset=["tree_id", "distance", "degrees"])
+    df = df.dropna(subset=["mean_dbh"])
+    df["mean_dbh"] = pd.to_numeric(df["mean_dbh"], errors="coerce")
+    
     df["x"] = df["distance"] * np.cos(df["degrees"] * np.pi / 200)
     df["y"] = df["distance"] * np.sin(df["degrees"] * np.pi / 200)
     #I divided by 200 cause the compas was with 400°. 
-    df["mean_dbh"] = pd.to_numeric(df["mean_dbh"], errors="coerce")
-    df = df.dropna(subset=["mean_dbh"])
+    
+    
     
     base = alt.Chart(df).encode(
-        x=alt.X("x", scale=alt.Scale(domain=[-20, 20])),
-        y=alt.Y("y", scale=alt.Scale(domain=[-20, 20])),
+        x=alt.X("x", scale=alt.Scale(domain=[-18, 18])),
+        y=alt.Y("y", scale=alt.Scale(domain=[-18, 18])),
         tooltip=["tree_id", "species", "mean_dbh", "dendrometer_id"]
     )
 
     species_layer = base.mark_circle().encode(
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
+        color=alt.Color("species:N")
     )
 
     if show_labels:
@@ -59,7 +63,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         orient="right"
     ).interactive()
 
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, use_container_width=False)
 
 def get_tree_info(df, tree_id):
     match = df[df["tree_id"].astype(str) == tree_id]
