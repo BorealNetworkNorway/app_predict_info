@@ -4,7 +4,7 @@ An quick application built with **Streamlit**, **Folium**, and **Altair** to vis
 ---
 
 
-### 📍 Map of Norway (Folium)
+### 🌍 Map of Norway (Folium)
 * Displays all forest plots.
 * Each **marker** corresponds to one plot.
 * The **selected plot** is highlighted in **red**, others in **blue**. # I still need to work on it
@@ -21,13 +21,13 @@ An quick application built with **Streamlit**, **Folium**, and **Altair** to vis
 * Trees are sized by **mean DBH**.
 * Option to display **tree IDs**.
 
-### 🟠 Dendrometers
+### 📐 Dendrometers
 * Trees with **dendrometers** are listed right under the plot selector.
 * A dedicated view highlights them. # I still need to work on it
 
 ---
 
-## 🗂 Project Infrastructure
+## 💻 Project Infrastructure
 ```
 predictmaps/
 │
@@ -41,7 +41,6 @@ predictmaps/
 ---
 
 ## ⚙️ Installation
-
 #### Install dependencies
 
 ```bash
@@ -68,9 +67,12 @@ streamlit run app.py
 ---
 
 
-## 💡 Customization | DATA 
-* 📁 `data/predict_tree_inventory_v3.xlsx`: Contains all plot data.
-Each sheet = one plot.
+## 📁  Customization | DATA 
+* `data/predict_tree_inventory_v3.xlsx`: Contains all plot data.
+Each sheet = one plot with the following columns :
+plot_id |	location |	coordinates |	date |	tree_id |	species	| dbh1 |	dbh2 |	mean_dbh |	distance |	degrees |	cond |	can_position |	dendrometer_id |	dendrocircum |	comments |	health 2024 |	health 2025
+
+
 
 
 ## 🧪 To Do / Ideas
