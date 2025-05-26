@@ -70,7 +70,7 @@ with st.expander("Plot View Options", expanded=True):
     st.download_button("Download Plot as Image", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
 
 
-if "dendrometer_ID" not in df_plot.columns:
+if "dendrometer_id" not in df_plot.columns:
     st.error("La colonne 'dendrometer_ID' est absente ! Voici les colonnes disponibles :")
     st.write(df_plot.columns.tolist())
 
