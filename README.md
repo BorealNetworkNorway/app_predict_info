@@ -42,7 +42,7 @@ predictmaps/
 
 ## ⚙️ Installation
 
-### Install dependencies
+#### Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -60,7 +60,7 @@ streamlit-folium
 altair>=5.0#
 ```
 
-# Run the Streamlit app
+#### Run the Streamlit app
 
 ```bash
 streamlit run app.py
@@ -82,8 +82,8 @@ Each sheet = one plot.
 ---
 
 ## 🧑‍💻 Authors
-* \Aurorecgandd (Aurore Dallery)
-* Danielle Creek 
+* \Aurorecgandd (Aurore Dallery) aka Lostinthewoods DJ
+* The great Danielle Creek
 * NMBU 
 ---
 
