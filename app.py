@@ -55,7 +55,7 @@ if map_response.get("last_object_clicked_tooltip"):
 # Choix final du plot
 selected_plot = clicked_plot if clicked_plot else dropdown_plot
 
-# ⚠️ Sécurité : vérifie bien que la clé existe
+# Making sure that the key exists
 if selected_plot not in data_by_plot:
     st.error(f"Selected plot '{selected_plot}' not found in data.")
     st.stop()
