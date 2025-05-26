@@ -113,12 +113,6 @@ if dendro_trees:
 else:
     st.sidebar.markdown("*No dendrometers recorded for now :(*")
 
-#####################################################
-# Display selected plot
-####################################################
-title = f"Plot {selected_plot} - ({df_plot['location'].iloc[0]})"
-st.subheader(title)
-show_tree_map(df_plot, show_labels=show_labels)
 
 #####################################################
 # Plot display options
@@ -126,6 +120,16 @@ show_tree_map(df_plot, show_labels=show_labels)
 with st.expander("Plot View Options", expanded=True):
     show_labels = st.checkbox("Tree IDs", value=False)
     st.download_button("Download plot as csv", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
+
+
+#####################################################
+# Display selected plot
+####################################################
+title = f"Plot {selected_plot} - ({df_plot['location'].iloc[0]})"
+st.subheader(title)
+show_tree_map(df_plot, show_labels=show_labels)
+
+
 
 #####################################################
 # Search for a specific tree in the sidebar
