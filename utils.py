@@ -53,7 +53,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
 
     origin_layer = alt.mark_point(
                     shape='cross', size=200, color='red'
-    ).encode(x=0, y=0)
+    ).encode(x=[0], y=[0])
     
     if show_labels:
         text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
