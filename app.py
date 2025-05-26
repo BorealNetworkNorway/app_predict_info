@@ -65,19 +65,14 @@ df_plot = data_by_plot[selected_plot]
 
 # Options
 with st.expander("Plot View Options", expanded=True):
-    show_dendros = st.checkbox("Dendrometers Trees", value=False)
     show_labels = st.checkbox("Tree IDs", value=False)
     st.download_button("Download Plot as Image", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
 
 
-if "dendrometer_id" not in df_plot.columns:
-    st.error("La colonne 'dendrometer_id' est absente ! Voici les colonnes disponibles :")
-    st.write(df_plot.columns.tolist())
-
 # Display plot
 title = f"Plot {selected_plot} - Tree Layout -  ({df_plot['location'].iloc[0]})"
 st.subheader(title)
-show_tree_map(df_plot, show_dendrometers=show_dendros, show_labels=show_labels)
+show_tree_map(df_plot, show_labels=show_labels)
 
 # 4. Tree search bar
 st.sidebar.title("Search Tree")
