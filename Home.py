@@ -12,4 +12,4 @@ selected_plot = st.selectbox("Choose a plot", plot_ids)
 
 if st.button("View Plot Details"):
     st.session_state["selected_plot"] = selected_plot
-    st.switch_page("PlotDetails")
+    st.switch_page("pages/PlotDetails.py")
