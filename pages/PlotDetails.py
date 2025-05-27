@@ -22,7 +22,7 @@ st.markdown(f"<h1 style='text-align: center;'>Welcome at plot {plot_id}</h1>", u
 
 col1, col2 = st.columns(2)
 with col1:
-    st.subheader(f"Plot {selected_plot} information")
+    st.subheader(f"Plot {plot_id} information")
     st.markdown(f"**Location:** {meta.get('location', 'N/A')}")
     st.markdown(f"**Altitude:** {meta.get('altitude', 'N/A')}")
     st.markdown(f"**Access:** {meta.get('access', 'N/A')}")
