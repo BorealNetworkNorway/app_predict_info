@@ -79,15 +79,10 @@ plot_ids = list(data_by_plot.keys())
 
 col1, col2 = st.columns(2)
 
-#Choice of the plot 
-with col1 : 
-    selected_plot = st.selectbox("Choose a plot", plot_ids)
-    if selected_plot not in data_by_plot:
-        st.error("Plot not found, sorryyyy.")
-        st.stop()
+
 
 #Map of Norway
-with col2: 
+with col1: 
     st.header("Map of the plots in Norway")
 
     map_center = [62.4, 11.0]
@@ -116,9 +111,15 @@ with col2:
     # Display the folium map
     map_response = st_folium(norway_map,  use_container_width=True, height=600)
 
-if st.button("View Plot Details"):
-    st.session_state["selected_plot"] = selected_plot
-    st.switch_page("pages/PlotDetails.py")
+#Choice of the plot 
+with col2 : 
+    selected_plot = st.selectbox("Choose a plot", plot_ids)
+    if selected_plot not in data_by_plot:
+        st.error("Plot not found, sorryyyy.")
+        st.stop()
+    if st.button("View Plot Details"):
+        st.session_state["selected_plot"] = selected_plot
+        st.switch_page("pages/PlotDetails.py")
 
 
 
