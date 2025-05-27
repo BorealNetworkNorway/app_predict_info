@@ -90,4 +90,4 @@ if os.path.exists(image_path):
       image = Image.open(image_path)
       st.image(image, caption=f"Photo of plot {plot_id}", use_container_width=True)
 
-st.button("Back to Home", on_click=lambda: st.switch_page("app.py"))
+st.button("Back to Home", on_click=lambda: st.switch_page("Home.py"))
