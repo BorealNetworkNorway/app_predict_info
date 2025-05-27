@@ -53,9 +53,6 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     df["has_dendrometer"] = df["dendrometer_id"].notna()
     # Dendrometer listing
     dendros = df[df["has_dendrometer"]][["tree_id", "dendrometer_id"]]
-    if not dendros.empty:
-        st.markdown("### Trees with Dendrometers")
-        st.dataframe(dendros)
 
     
     # Base Altair chart setup with tooltips
@@ -98,6 +95,12 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
 
     st.altair_chart(chart, use_container_width=False)
 
+    if not dendros.empty:
+        st.markdown("### Trees with Dendrometers")
+        st.dataframe(dendros)
+    else : 
+        st.markdown("### Trees with Dendrometers")
+        st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
 
 def get_tree_info(df, tree_id):
     """
