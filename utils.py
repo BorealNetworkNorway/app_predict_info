@@ -4,6 +4,8 @@
 import pandas as pd
 import streamlit as st
 import numpy as np
+import altair as alt
+
 
 def load_data(excel_path):
     xls = pd.ExcelFile(excel_path)
