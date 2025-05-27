@@ -19,7 +19,8 @@ df_plot = data_by_plot[plot_id]
 meta = get_plot_metadata(metadata_df, plot_id)
 
 st.markdown(f"<h1 style='text-align: center;'>Welcome at plot {plot_id}</h1>", unsafe_allow_html=True)
-
+st.subheader("Table complète des métadonnées des plots")
+st.dataframe(metadata_df, use_container_width=True)
 col1, col2 = st.columns(2)
 with col1:
     st.subheader(f"Plot {plot_id} information")
