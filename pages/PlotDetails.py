@@ -9,11 +9,11 @@ from streamlit_folium import st_folium
 
 st.set_page_config(page_title="Plot Details", layout="wide")
 
-if "plot_id" not in st.session_state:
+if "selected_plot" not in st.session_state:
     st.error("No plot selected. Please go back to the home page.")
     st.stop()
 
-plot_id = st.session_state["plot_id"]
+plot_id = st.session_state["selected_plot"]
 data_by_plot, metadata_df = load_data("data/predict_tree_inventory_v3.xlsx")
 df_plot = data_by_plot[plot_id]
 meta = get_plot_metadata(metadata_df, plot_id)
