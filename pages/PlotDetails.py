@@ -76,9 +76,10 @@ with col1 :
         else:
             st.sidebar.error("Tree not found")
 with col2 : 
-    if not dendros.empty:
-        st.markdown("### Trees with Dendrometers")
-        st.dataframe(dendros)
+    dendro_df = df_plot[df_plot["has_dendrometer"]][["tree_id", "dendrometer_id"]].dropna()
+    st.markdown("#### Trees with Dendrometers")
+    if not dendro_df.empty : 
+        st.dataframe(dendro_df)
     else : 
         st.markdown("### Trees with Dendrometers")
         st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
