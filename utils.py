@@ -39,9 +39,13 @@ def get_plot_metadata(metadata_df, plot_id):
     """
     Return metadata info for a specific plot_id
     """
-    row = metadata_df[metadata_df["plot_id"] == str(plot_id)]
+    plot_row = metadata_df[metadata_df["plot_id"] == plot_id]
+    st.dataframe(plot_row)
+    first_row = metadata_df.iloc[0]
+    metadata_dict = first_row.to_dict()
+    
     if not row.empty:
-        return row.iloc[0].to_dict()
+        return row.to_dict()
     return {}
 
 
