@@ -21,6 +21,8 @@ meta = get_plot_metadata(metadata_df, plot_id)
 st.markdown(f"<h1 style='text-align: center;'>Welcome at plot {plot_id}</h1>", unsafe_allow_html=True)
 st.subheader("Table complète des métadonnées des plots")
 st.dataframe(metadata_df, use_container_width=True)
+st.dataframe(meta, use_container_width=True)
+st.write(plot_id)
 col1, col2 = st.columns(2)
 with col1:
     st.subheader(f"Plot {plot_id} information")
@@ -60,17 +62,27 @@ st.subheader(title_tree_map)
 show_tree_map(df_plot, show_dendrometers=show_dendro, show_labels=show_labels)
 
 #####################################################
-# Search for a specific tree in the sidebar
+# Search for a specific tree in the sidebar / display dendrometer tress
 #####################################################
-st.sidebar.title("Search a tree")
-tree_id = st.sidebar.text_input("Enter tree_ID, pleaaaase")
-if tree_id:
-    result = get_tree_info(df_plot, tree_id)
-    st.sidebar.markdown("---")
-    if result is not None:
-        st.sidebar.write(result)
-    else:
-        st.sidebar.error("Tree not found")
+col1, col2 = st.columns(2)
+with col1 :
+    st.sidebar.title("Search a tree")
+    tree_id = st.sidebar.text_input("Enter tree_ID, pleaaaase")
+    if tree_id:
+        result = get_tree_info(df_plot, tree_id)
+        st.sidebar.markdown("---")
+        if result is not None:
+            st.sidebar.write(result)
+        else:
+            st.sidebar.error("Tree not found")
+with col2 : 
+    if not dendros.empty:
+        st.markdown("### Trees with Dendrometers")
+        st.dataframe(dendros)
+    else : 
+        st.markdown("### Trees with Dendrometers")
+        st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
+
 
 
 image_path = f"data/images/{plot_id}.jpg"
