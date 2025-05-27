@@ -125,7 +125,7 @@ with st.expander("Plot View Options", expanded=True):
 ####################################################
 title = f"Plot {selected_plot} ({df_plot['location'].iloc[0]})"
 st.subheader(title)
-show_tree_map(df_plot, show_labels=show_labels)
+show_tree_map(df_plot,show_dendrometers=show_dendros, show_labels=show_labels)
 
 
 
