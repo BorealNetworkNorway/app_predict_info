@@ -47,4 +47,4 @@ if coords:
     folium.Marker([lat, lon], tooltip=f"Plot {plot_id}").add_to(local_map)
     st_folium(local_map, width=800, height=400)
 
-st.button("🔙 Back to Home", on_click=lambda: st.switch_page("Home.py"))
+st.button("Back to Home", on_click=lambda: st.switch_page("app.py"))
