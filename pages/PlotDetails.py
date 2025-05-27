@@ -40,7 +40,38 @@ with col2:
         local_map = folium.Map(location=[lat, lon], zoom_start=14)
         folium.Marker([lat, lon], tooltip=f"Plot {plot_id}").add_to(local_map)
         st_folium(local_map, width=800, height=400)
-        
+#####################################################
+# Plot display options
+#####################################################
+with st.expander("Plot View Options", expanded=True):
+    show_labels = st.checkbox("Tree IDs", value=False)
+    show_dendro = st.checkbox("Show dendrometers and not drendrometers", value=True)
+    st.download_button("Download plot as csv", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
+
+
+#####################################################
+# Tree map 
+####################################################
+
+title_tree_map = f"Plot {selected_plot} ({df_plot['location'].iloc[0]})"
+st.subheader(title_tree_map)
+
+show_tree_map(df_plot, show_dendrometers=show_dendro, show_labels=show_labels)
+
+#####################################################
+# Search for a specific tree in the sidebar
+#####################################################
+st.sidebar.title("Search a tree")
+tree_id = st.sidebar.text_input("Enter tree_ID, pleaaaase")
+if tree_id:
+    result = get_tree_info(df_plot, tree_id)
+    st.sidebar.markdown("---")
+    if result is not None:
+        st.sidebar.write(result)
+    else:
+        st.sidebar.error("Tree not found")
+
+
 image_path = f"data/images/{plot_id}.jpg"
 if os.path.exists(image_path):
       image = Image.open(image_path)
