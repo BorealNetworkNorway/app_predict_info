@@ -1,26 +1,27 @@
-# utils.py
+# --- utils.py ---
 
 #Import
 import pandas as pd
-import altair as alt
 import streamlit as st
 import numpy as np
 
-
 def load_data(excel_path):
-    """ 
-    Load and clean the data excel 
-    """
-    
     xls = pd.ExcelFile(excel_path)
     data_by_sheet = {}
-    
-    for name in xls.sheet_names: # Iterate over each sheet 
-        df = xls.parse(name)     # Read the sheet into a DataFrame
+    metadata_df = None
+
+    for name in xls.sheet_names:
+        df = xls.parse(name)
         df.columns = [str(c).strip().lower().replace(" ", "_") for c in df.columns]
-        df["plot_id"] = name
-        data_by_sheet[name] = df 
-    return data_by_sheet
+
+        if name == "metadata":
+            metadata_df = df
+        else:
+            df["plot_id"] = name
+            data_by_sheet[name] = df
+
+    return data_by_sheet, metadata_df
+
 
 def get_plot_coordinates(df):
     """
@@ -30,6 +31,17 @@ def get_plot_coordinates(df):
     if coords:
         return list(map(float, coords.split(",")))
     return None
+
+
+def get_plot_metadata(metadata_df, plot_id):
+    """
+    Return metadata info for a specific plot_id
+    """
+    row = metadata_df[metadata_df["plot_id"] == plot_id]
+    if not row.empty:
+        return row.iloc[0].to_dict()
+    return {}
+
 
 def show_tree_map(df, show_dendrometers=False, show_labels=False):
     """ 
@@ -73,13 +85,13 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         color_encoding = alt.Color("species:N")
 
     
-    species_layer = base.mark_circle().encode(
+    circles = base.mark_circle().encode(
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
         color=color_encoding
     )
 
     
-    origin_layer = alt.Chart(
+    origin = alt.Chart(
         pd.DataFrame({'x': [0], 'y': [0]})
     ).mark_point(shape='cross',size=200,color='red').encode(
         x='x:Q', y='y:Q'
@@ -88,22 +100,16 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     # Optional text labels for tree IDs
     if show_labels:
         text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
-        chart = (species_layer + text_layer + origin_layer).properties(
-                 width = 800, height= 800, 
-                title=f"Plot probably full of rocks and roots"
-    ).configure_legend(
-        orient="right"
-    ).interactive()
-        
+        chart = (circles + text_layer + origin)
     else:
-        chart = (species_layer + origin_layer).properties(
+        chart = (circles + origin)
+
+    st.altair_chart(chart.properties(
                 width = 800, height= 800,
                 title=f"Plot probably full of rocks and roots"
     ).configure_legend(
         orient="right"
-    ).interactive()
-
-    st.altair_chart(chart, use_container_width=False)
+    ).interactive(), use_container_width=False)
 
     if not dendros.empty:
         st.markdown("### Trees with Dendrometers")
@@ -120,4 +126,3 @@ def get_tree_info(df, tree_id):
     if not match.empty:
         return match.iloc[0].to_frame().rename(columns={0: "value"})
     return None
-
