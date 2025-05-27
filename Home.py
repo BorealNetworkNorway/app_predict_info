@@ -76,45 +76,51 @@ excel_path = "data/predict_tree_inventory_v3.xlsx"
 data_by_plot, metadata_df = load_data(excel_path)
 plot_ids = list(data_by_plot.keys())
 
-selected_plot = st.selectbox("Choose a plot", plot_ids)
-if selected_plot not in data_by_plot:
-    st.error("Plot not found, sorryyyy.")
-    st.stop()
+
+col1, col2 = st.columns(2)
+
+#Choice of the plot 
+with col1 : 
+    selected_plot = st.selectbox("Choose a plot", plot_ids)
+    if selected_plot not in data_by_plot:
+        st.error("Plot not found, sorryyyy.")
+        st.stop()
+
+#Map of Norway
+with col2: 
+    st.header("Map of the plots in Norway")
+
+    map_center = [62.4, 11.0]
+    norway_map = folium.Map(location=map_center, zoom_start=5)
+    
+    # Add one marker per plot 
+    for plot_id, df in data_by_plot.items():
+        loc = df["location"].iloc[0]
+        coords = df["coordinates"].iloc[0]
+        if coords:
+            lat, lon = map(float, coords.split(",")) # convert the coordinates to float
+            folium.map.Marker(
+                [lat, lon],
+                icon=folium.DivIcon(
+                    html=f"""
+                    <div style="font-size: 9px; font-weight: bold; color: white;
+                    background-color: purple; border-radius: 4px;
+                    padding: 4px 5px; text-align: left; position: relative; left: -4px;">
+                        {plot_id}
+                    </div>
+                    """
+                ),
+                tooltip=f"Plot {plot_id}: {loc}"
+                ).add_to(norway_map)
+    
+    # Display the folium map
+    map_response = st_folium(norway_map,  use_container_width=True, height=600)
 
 if st.button("View Plot Details"):
     st.session_state["selected_plot"] = selected_plot
     st.switch_page("pages/PlotDetails.py")
 
-#####################################################
-# Display map of Norway 
-#####################################################
-st.header("Map of the plots in Norway")
 
-map_center = [62.4, 11.0]
-norway_map = folium.Map(location=map_center, zoom_start=5)
-
-# Add one marker per plot 
-for plot_id, df in data_by_plot.items():
-    loc = df["location"].iloc[0]
-    coords = df["coordinates"].iloc[0]
-    if coords:
-        lat, lon = map(float, coords.split(",")) # convert the coordinates to float
-        folium.map.Marker(
-            [lat, lon],
-            icon=folium.DivIcon(
-                html=f"""
-                <div style="font-size: 9px; font-weight: bold; color: white;
-                background-color: purple; border-radius: 4px;
-                padding: 4px 5px; text-align: left; position: relative; left: -4px;">
-                    {plot_id}
-                </div>
-                """
-            ),
-            tooltip=f"Plot {plot_id}: {loc}"
-            ).add_to(norway_map)
-
-# Display the folium map
-map_response = st_folium(norway_map,  use_container_width=True, height=600)
 
 
 
