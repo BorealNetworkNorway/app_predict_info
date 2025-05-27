@@ -1,6 +1,4 @@
- ------------------------
 # PlotDetails.py
-# ------------------------
 
 import streamlit as st
 from utils import load_data, get_plot_metadata
