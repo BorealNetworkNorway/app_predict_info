@@ -63,13 +63,19 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     )
 
     # Main layer: colored circles by species, sized by mean DBH
+    if show_dendrometers:
+        color_encoding = alt.condition(
+            "datum.has_dendrometer",
+            alt.value("orange"),
+            alt.Color("species:N")
+        )
+    else:
+        color_encoding = alt.Color("species:N")
+
+    
     species_layer = base.mark_circle().encode(
         size=alt.Size("mean_dbh", scale=alt.Scale(range=[30, 200])),
-        color=alt.condition(
-                show_dendrometers,
-                alt.condition("datum.has_dendrometer", alt.value("orange"), alt.Color("species:N")),
-                alt.Color("species:N")
-        )
+        color=color_encoding
     )
 
     
