@@ -19,20 +19,19 @@ df_plot = data_by_plot[plot_id]
 meta = get_plot_metadata(metadata_df, plot_id)
 
 st.markdown(f"<h1 style='text-align: center;'>Welcome at plot {plot_id}</h1>", unsafe_allow_html=True)
-st.subheader("Table complète des métadonnées des plots")
-st.dataframe(metadata_df, use_container_width=True)
-st.dataframe(meta, use_container_width=True)
-st.write(plot_id)
+
 col1, col2 = st.columns(2)
 with col1:
     st.subheader(f"Plot {plot_id} information")
     st.markdown(f"**Location:** {meta.get('location', 'N/A')}")
-    st.markdown(f"**Altitude:** {meta.get('altitude', 'N/A')}")
-    st.markdown(f"**Access:** {meta.get('access', 'N/A')}")
-    st.markdown(f"**Owner Contact:** {meta.get('owner_contact', 'N/A')}")
-    st.markdown(f"**Number of Trees:** {meta.get('number_of_trees', 'N/A')}")
-    st.markdown(f"**Category:** {meta.get('category', 'N/A')}")
     st.markdown(f"**County:** {meta.get('county', 'N/A')}")
+    st.markdown(f"**Category:** {meta.get('category', 'N/A')}")
+    st.markdown(f"**Owner Contact:** {meta.get('owner_contact', 'N/A')}")
+    st.markdown(f"**Access:** {meta.get('access', 'N/A')}")
+    st.markdown(f"**Number of Trees:** {meta.get('number_of_trees', 'N/A')}")
+    st.markdown(f"**Altitude:** {meta.get('altitude', 'N/A')}")
+    st.markdown(f"**Mean temperature (°C):** {meta.get('mean_temperature', 'N/A')}")
+    st.markdown(f"**Soil type ** {meta.get('pedology', 'N/A')}")
     st.markdown(f"**Box Number:** {meta.get('box_number', 'N/A')}")
 
 with col2:
