@@ -76,6 +76,7 @@ with col1 :
         else:
             st.sidebar.error("Tree not found")
 with col2 : 
+    dendro_df["has_dendrometer"] = dendro_df["dendrometer_id"].notna()
     dendro_df = df_plot[df_plot["has_dendrometer"]][["tree_id", "dendrometer_id"]].dropna()
     st.markdown("#### Trees with Dendrometers")
     if not dendro_df.empty : 
