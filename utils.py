@@ -75,7 +75,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     if show_labels:
         text_layer = base.mark_text(align="center", dy=-10).encode(text="tree_id:N")
         chart = (species_layer + text_layer + origin_layer).properties(
-                width=1000, height=1000, 
+                 use_container_width=True, height=width, 
                 title=f"Plot probably full of rocks and roots"
     ).configure_legend(
         orient="right"
@@ -83,7 +83,8 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         
     else:
         chart = (species_layer + origin_layer).properties(
-        width=1000, height=1000, title=f"Plot probably full of rocks and roots"
+                use_container_width=True, height=width, 
+                title=f"Plot probably full of rocks and roots"
     ).configure_legend(
         orient="right"
     ).interactive()
