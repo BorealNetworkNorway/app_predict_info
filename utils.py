@@ -39,13 +39,18 @@ def get_plot_metadata(metadata_df, plot_id):
     """
     Return metadata info for a specific plot_id
     """
-    plot_row = metadata_df[metadata_df["plot_id"] == plot_id]
-    st.dataframe(plot_row)
-    first_row = metadata_df.iloc[0]
-    metadata_dict = first_row.to_dict()
-    
+    plot_id_str = str(plot_id)
+
+    # Filtrer la DataFrame pour ne garder que la ligne correspondant au plot_id
+    plot_row = metadata_df[metadata_df["plot_id"].astype(str) == plot_id_str]
+
+    # Vérifier si une ligne correspond
     if not plot_row.empty:
-        return plot_row.to_dict()
+        # Extraire la première (et unique) ligne trouvée comme dictionnaire
+        metadata_dict = plot_row.iloc[0].to_dict()
+        return metadata_dict
+
+    # Aucun résultat trouvé
     return {}
 
 
