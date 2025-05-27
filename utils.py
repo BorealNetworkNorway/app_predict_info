@@ -113,13 +113,7 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
         orient="right"
     ).interactive(), use_container_width=False)
 
-    if not dendros.empty:
-        st.markdown("### Trees with Dendrometers")
-        st.dataframe(dendros)
-    else : 
-        st.markdown("### Trees with Dendrometers")
-        st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
-
+    
 def get_tree_info(df, tree_id):
     """
     Return information about a specific tree given its ID
