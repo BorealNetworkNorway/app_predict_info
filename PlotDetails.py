@@ -1,0 +1,50 @@
+ ------------------------
+# PlotDetails.py
+# ------------------------
+
+import streamlit as st
+from utils import load_data, get_plot_metadata
+import os
+import folium
+from PIL import Image
+from streamlit_folium import st_folium
+
+st.set_page_config(page_title="Plot Details", layout="wide")
+
+if "selected_plot" not in st.session_state:
+    st.error("No plot selected. Please go back to the home page.")
+    st.stop()
+
+plot_id = st.session_state["selected_plot"]
+data_by_plot, metadata_df = load_data("data/predict_tree_inventory_v3.xlsx")
+df_plot = data_by_plot[plot_id]
+meta = get_plot_metadata(metadata_df, plot_id)
+
+st.markdown(f"<h2 style='text-align: center;'>Plot: {plot_id}</h2>", unsafe_allow_html=True)
+
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown(f"**Location:** {meta.get('location', 'N/A')}")
+    st.markdown(f"**Altitude:** {meta.get('altitude', 'N/A')}")
+    st.markdown(f"**Access:** {meta.get('access', 'N/A')}")
+    st.markdown(f"**Owner Contact:** {meta.get('owner_contact', 'N/A')}")
+    st.markdown(f"**Number of Trees:** {meta.get('number_of_trees', 'N/A')}")
+    st.markdown(f"**Category:** {meta.get('category', 'N/A')}")
+    st.markdown(f"**County:** {meta.get('county', 'N/A')}")
+    st.markdown(f"**Box Number:** {meta.get('box_number', 'N/A')}")
+
+with col2:
+  image_path = f"data/images/{plot_id}.jpg"
+  if os.path.exists(image_path):
+      image = Image.open(image_path)
+      st.image(image, caption=f"Photo of Plot {plot_id}", use_container_width=True)
+      
+
+coords = df_plot["coordinates"].iloc[0]
+if coords:
+    lat, lon = map(float, coords.split(","))
+    local_map = folium.Map(location=[lat, lon], zoom_start=14)
+    folium.Marker([lat, lon], tooltip=f"Plot {plot_id}").add_to(local_map)
+    st_folium(local_map, width=800, height=400)
+
+st.button("🔙 Back to Home", on_click=lambda: st.switch_page("Home.py"))
