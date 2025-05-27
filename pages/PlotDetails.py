@@ -9,11 +9,11 @@ from streamlit_folium import st_folium
 
 st.set_page_config(page_title="Plot Details", layout="wide")
 
-if "selected_plot" not in st.session_state:
+if "plot_id" not in st.session_state:
     st.error("No plot selected. Please go back to the home page.")
     st.stop()
 
-plot_id = st.session_state["selected_plot"]
+plot_id = st.session_state["plot_id"]
 data_by_plot, metadata_df = load_data("data/predict_tree_inventory_v3.xlsx")
 df_plot = data_by_plot[plot_id]
 meta = get_plot_metadata(metadata_df, plot_id)
@@ -46,14 +46,14 @@ with col2:
 with st.expander("Plot View Options", expanded=True):
     show_labels = st.checkbox("Tree IDs", value=False)
     show_dendro = st.checkbox("Show dendrometers and not drendrometers", value=True)
-    st.download_button("Download plot as csv", data=df_plot.to_csv(index=False), file_name=f"plot_{selected_plot}.csv")
+    st.download_button("Download plot as csv", data=df_plot.to_csv(index=False), file_name=f"plot_{plot_id}.csv")
 
 
 #####################################################
 # Tree map 
 ####################################################
 
-title_tree_map = f"Plot {selected_plot} ({df_plot['location'].iloc[0]})"
+title_tree_map = f"Plot {plot_id} ({df_plot['location'].iloc[0]})"
 st.subheader(title_tree_map)
 
 show_tree_map(df_plot, show_dendrometers=show_dendro, show_labels=show_labels)
