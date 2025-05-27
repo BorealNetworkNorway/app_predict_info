@@ -31,7 +31,7 @@ with col1:
     st.markdown(f"**Number of Trees:** {meta.get('number_of_trees', 'N/A')}")
     st.markdown(f"**Altitude:** {meta.get('altitude', 'N/A')}")
     st.markdown(f"**Mean temperature (°C):** {meta.get('mean_temperature', 'N/A')}")
-    st.markdown(f"**Soil type ** {meta.get('pedology', 'N/A')}")
+    st.markdown(f"**Soil type:** {meta.get('pedology', 'N/A')}")
     st.markdown(f"**Box Number:** {meta.get('box_number', 'N/A')}")
 
 with col2:
