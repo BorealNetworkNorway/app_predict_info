@@ -50,7 +50,14 @@ def show_tree_map(df, show_dendrometers=False, show_labels=False):
     df["x"] = df["distance"] * np.cos(df["degrees"] * np.pi / 200)
     df["y"] = df["distance"] * np.sin(df["degrees"] * np.pi / 200)
     
-        
+    df["has_dendrometer"] = df["dendrometer_id"].notna()
+    # Dendrometer listing
+    dendros = df[df["has_dendrometer"]][["tree_id", "dendrometer_id"]]
+    if not dendros.empty:
+        st.markdown("### Trees with Dendrometers")
+        st.dataframe(dendros)
+
+    
     # Base Altair chart setup with tooltips
     base = alt.Chart(df).encode(
         x=alt.X("x", scale=alt.Scale(domain=[-18, 18])),
