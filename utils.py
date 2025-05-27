@@ -44,8 +44,8 @@ def get_plot_metadata(metadata_df, plot_id):
     first_row = metadata_df.iloc[0]
     metadata_dict = first_row.to_dict()
     
-    if not row.empty:
-        return row.to_dict()
+    if not plot_row.empty:
+        return plot_row.to_dict()
     return {}
 
 
