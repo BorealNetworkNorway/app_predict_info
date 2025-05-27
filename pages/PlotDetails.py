@@ -66,15 +66,15 @@ show_tree_map(df_plot, show_dendrometers=show_dendro, show_labels=show_labels)
 #####################################################
 col1, col2 = st.columns(2)
 with col1 :
-    st.sidebar.title("Search a tree")
-    tree_id = st.sidebar.text_input("Enter tree_ID, pleaaaase")
+    st.title("Search a tree")
+    tree_id = st.text_input("Enter tree_ID, pleaaaase")
     if tree_id:
         result = get_tree_info(df_plot, tree_id)
-        st.sidebar.markdown("---")
+        st.markdown("---")
         if result is not None:
-            st.sidebar.write(result)
+            st.write(result)
         else:
-            st.sidebar.error("Tree not found")
+            st.error("Tree not found")
 with col2 : 
     df_plot["has_dendrometer"] = df_plot["dendrometer_id"].notna()
     dendro_df = df_plot[df_plot["has_dendrometer"]][["tree_id", "dendrometer_id"]].dropna()
@@ -82,7 +82,6 @@ with col2 :
     if not dendro_df.empty : 
         st.dataframe(dendro_df)
     else : 
-        st.markdown("### Trees with Dendrometers")
         st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
 
 
