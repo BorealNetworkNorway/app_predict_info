@@ -87,31 +87,31 @@ if st.button("View Plot Details"):
 
 #Map of Norway
 st.header("Map of the plots in Norway")
-    map_center = [62.4, 11.0]
-    norway_map = folium.Map(location=map_center, zoom_start=5)
+map_center = [62.4, 11.0]
+norway_map = folium.Map(location=map_center, zoom_start=5)
     
-    # Add one marker per plot 
-    for plot_id, df in data_by_plot.items():
-        loc = df["location"].iloc[0]
-        coords = df["coordinates"].iloc[0]
-        if coords:
-            lat, lon = map(float, coords.split(",")) # convert the coordinates to float
-            folium.map.Marker(
-                [lat, lon],
-                icon=folium.DivIcon(
-                    html=f"""
-                    <div style="font-size: 9px; font-weight: bold; color: white;
-                    background-color: purple; border-radius: 4px;
-                    padding: 4px 5px; text-align: left; position: relative; left: -4px;">
-                        {plot_id}
-                    </div>
+# Add one marker per plot 
+for plot_id, df in data_by_plot.items():
+    loc = df["location"].iloc[0]
+    coords = df["coordinates"].iloc[0]
+    if coords:
+        lat, lon = map(float, coords.split(",")) # convert the coordinates to float
+        folium.map.Marker(
+            [lat, lon],
+            icon=folium.DivIcon(
+                html=f"""
+                <div style="font-size: 9px; font-weight: bold; color: white;
+                background-color: purple; border-radius: 4px;
+                padding: 4px 5px; text-align: left; position: relative; left: -4px;">
+                    {plot_id}
+                 </div>
                     """
-                ),
-                tooltip=f"Plot {plot_id}: {loc}"
-                ).add_to(norway_map)
-    
-    # Display the folium map
-    map_response = st_folium(norway_map,  use_container_width=True, height=600)
+            ),
+            tooltip=f"Plot {plot_id}: {loc}"
+            ).add_to(norway_map)
+
+# Display the folium map
+map_response = st_folium(norway_map,  use_container_width=True, height=600)
 
 
     
