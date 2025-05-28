@@ -105,7 +105,7 @@ with col2:
 #Map of Norway
 st.header("Map of the plots in Norway")
 map_center = [62.4, 11.0]
-norway_map = folium.Map(location=map_center, zoom_start=5)
+norway_map = folium.Map(location=map_center, zoom_start=6)
     
 # Add one marker per plot 
 for plot_id, df in data_by_plot.items():
