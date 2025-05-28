@@ -77,11 +77,28 @@ data_by_plot, metadata_df = load_data(excel_path)
 plot_ids = list(data_by_plot.keys())
 
 #Choice of the plot 
-selected_plot = st.selectbox("Choose a plot", plot_ids)
+
+st.markdown("<h2 style='text-align:center;'>Choose a Plot</h2>", unsafe_allow_html=True)
+centered_box = """
+    <style>
+    div[data-baseweb="select"] {
+        margin-left: auto;
+        margin-right: auto;
+        width: 300px;
+    }
+    </style>
+"""
+st.markdown(centered_box, unsafe_allow_html=True)
+selected_plot = st.selectbox("", plot_ids, label_visibility="collapsed")
+
+
 if selected_plot not in data_by_plot:
         st.error("Plot not found, sorryyyy.")
         st.stop()
-if st.button("View Plot Details"):
+    
+col1, col2, col3 = st.columns([1, 1, 1])
+with col2:
+    if st.button("View Plot Details"):
         st.session_state["selected_plot"] = selected_plot
         st.switch_page("pages/PlotDetails.py")
 
