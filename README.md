@@ -1,6 +1,6 @@
 # 🌲 Predict Project – Forest Plot  App
 
-An quick application built with **Streamlit**, **Folium**, and **Altair** to visualize the different forest plots as part of the **PREDICT project**.
+An quick application  to visualize the different forest plots as part of the **PREDICT project**.
 ---
 https://predictprojectinfoapp.streamlit.app
 
@@ -55,6 +55,7 @@ folium
 streamlit-folium
 altair>=5.0#
 ```
+( built with **Streamlit**, **Folium**, and **Altair**)
 
 #### Run the Streamlit app
 
