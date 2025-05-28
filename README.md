@@ -2,19 +2,13 @@
 
 An quick application built with **Streamlit**, **Folium**, and **Altair** to visualize the different forest plots as part of the **PREDICT project**.
 ---
-https://apppredictplots.streamlit.app/ 
+https://predictprojectinfoapp.streamlit.app
 
 ### 🌍 Map of Norway (Folium)
 * Displays all forest plots.
-* Each **marker** corresponds to one plot.
-* The **selected plot** is highlighted in **red**, others in **blue**. # I still need to work on it
-  
-* Clicking a marker selects the corresponding plot.
 
 ### 🧭 Plot Selection
 * **Sidebar dropdown** to manually select a plot.
-* Automatically syncs with map marker clicks.
-
 
 ### 🌳 Tree Visualization
 * Shows the **tree layout** in transformed polar coordinates.
@@ -31,10 +25,14 @@ https://apppredictplots.streamlit.app/
 ```
 predictmaps/
 │
-├── app.py
+├── Home.py
 ├── utils.py
+├── pages/
+│   └── PlotDetails.xlsx
+│   └── About.xlsx
 ├── data/
 │   └── predict_tree_inventory_v3.xlsx
+│   └── images/
 ├── requirements.txt
 └── README.md
 ```
@@ -47,7 +45,6 @@ predictmaps/
 pip install -r requirements.txt
 ```
 ---
-
 #### 📦 `requirements.txt`
 These are the required libraries:
 ```txt
@@ -74,12 +71,9 @@ plot_id |	location |	coordinates |	date |	tree_id |	species	| dbh1 |	dbh2 |	mean
 
 
 
-
 ## 🧪 To Do / Ideas
 * Filter by species.
 * Write what you want ☺ 
-
-
 
 ---
 
