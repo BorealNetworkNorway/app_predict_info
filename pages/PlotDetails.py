@@ -19,6 +19,7 @@ df_plot = data_by_plot[plot_id]
 meta = get_plot_metadata(metadata_df, plot_id)
 
 st.markdown(f"<h1 style='text-align: center;'>Welcome at plot {plot_id}</h1>", unsafe_allow_html=True)
+st.markdown(f"**Comments :** {meta.get('comments', 'N/A')}")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -29,8 +30,10 @@ with col1:
     st.markdown(f"**Owner Contact:** {meta.get('owner_contact', 'N/A')}")
     st.markdown(f"**Access:** {meta.get('access', 'N/A')}")
     st.markdown(f"**Number of Trees:** {meta.get('number_of_trees', 'N/A')}")
-    st.markdown(f"**Altitude:** {meta.get('altitude', 'N/A')}")
+    st.markdown(f"**Altitude (m):** {meta.get('altitude', 'N/A')}")
     st.markdown(f"**Mean temperature (°C):** {meta.get('mean_temperature', 'N/A')}")
+    st.markdown(f"**Annual precipitation (mm):** {meta.get('mean_precipitation', 'N/A')}")
+    st.markdown(f"**Main rock:** {meta.get('geology', 'N/A')}")
     st.markdown(f"**Soil type:** {meta.get('pedology', 'N/A')}")
     st.markdown(f"**Box Number:** {meta.get('box_number', 'N/A')}")
 
@@ -90,4 +93,4 @@ if os.path.exists(image_path):
       image = Image.open(image_path)
       st.image(image, caption=f"Photo of plot {plot_id}", use_container_width=True)
 
-st.button("Back to Home", on_click=lambda: st.switch_page("Home.py"))
+st.button("Back to Home", on_click=lambda: st.switch_page("main/Home.py"))
