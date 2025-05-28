@@ -76,15 +76,17 @@ excel_path = "data/predict_tree_inventory_v3.xlsx"
 data_by_plot, metadata_df = load_data(excel_path)
 plot_ids = list(data_by_plot.keys())
 
-
-col1, col2 = st.columns(2)
-
-
+#Choice of the plot 
+selected_plot = st.selectbox("Choose a plot", plot_ids)
+if selected_plot not in data_by_plot:
+        st.error("Plot not found, sorryyyy.")
+        st.stop()
+if st.button("View Plot Details"):
+        st.session_state["selected_plot"] = selected_plot
+        st.switch_page("pages/PlotDetails.py")
 
 #Map of Norway
-with col1: 
-    st.header("Map of the plots in Norway")
-
+st.header("Map of the plots in Norway")
     map_center = [62.4, 11.0]
     norway_map = folium.Map(location=map_center, zoom_start=5)
     
@@ -111,15 +113,8 @@ with col1:
     # Display the folium map
     map_response = st_folium(norway_map,  use_container_width=True, height=600)
 
-#Choice of the plot 
-with col2 : 
-    selected_plot = st.selectbox("Choose a plot", plot_ids)
-    if selected_plot not in data_by_plot:
-        st.error("Plot not found, sorryyyy.")
-        st.stop()
-    if st.button("View Plot Details"):
-        st.session_state["selected_plot"] = selected_plot
-        st.switch_page("pages/PlotDetails.py")
+
+    
 
 
 
