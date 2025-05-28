@@ -6,14 +6,14 @@ st.markdown("<h1 style='text-align:center;'>About the Forest Explorer</h1>", uns
 
 st.markdown("""
 ### About the Application
-This application allows users to explore forest plots in Norway as part of the **PREDICT project**. 
+This application allows users to explore forest plots as part of the **PREDICT project**. 
 You can view plot-specific metadata, tree inventory, and visualize their geographical distribution.
-
+Please contact aurore.dallery@insa-lyon.fr for any modifications/errors/bread_to_offer. 
 ---
 
 ### About the PREDICT Project
 **PREDICT** is a scientific project led by the Norwegian University of Life Sciences (NMBU).  
-It aims to study how forest structure and biodiversity respond to environmental changes over time.  
+It aims to study the impact of drought and increased temperatures on boreal forest ecosystems in Norway
 Learn more about the project [here](https://www.nmbu.no/en/research/projects/predict).
 
 ---
