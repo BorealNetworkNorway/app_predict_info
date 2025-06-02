@@ -8,6 +8,7 @@ st.markdown("""
 ## About the Application
 This application allows users to explore forest plots as part of the **PREDICT project**. 
 You can view plot-specific metadata, tree inventory, and visualize their geographical distribution.
+The Github repo can be found [here](https://github.com/BorealNetworkNorway/app_predict_info).
 Please contact aurore.dallery@insa-lyon.fr for any modifications/errors/bread_to_offer. 
 
 ---
