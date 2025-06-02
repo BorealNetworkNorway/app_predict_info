@@ -20,7 +20,7 @@ Learn more about the project [here](https://www.nmbu.no/en/research/projects/pre
 ---
 
 ### Data Sources
-- **Geological data**: Provided by [geo.ngu.no](https://www.ngu.no/geologiske-kart)
+- **Geological data**: Provided by [ngu.no](https://www.ngu.no/geologiske-kart)
 - **Mean temperature data**: Collected from [climatecharts.net](https://climatecharts.net)
 
 ---
