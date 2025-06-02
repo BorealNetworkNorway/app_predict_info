@@ -5,7 +5,7 @@ st.set_page_config(page_title="About", layout="wide")
 st.markdown("<h1 style='text-align:center;'>About the Forest Explorer</h1>", unsafe_allow_html=True)
 
 st.markdown("""
-### About the Application
+## About the Application
 
 This application allows users to explore forest plots as part of the **PREDICT project**. 
 You can view plot-specific metadata, tree inventory, and visualize their geographical distribution.
