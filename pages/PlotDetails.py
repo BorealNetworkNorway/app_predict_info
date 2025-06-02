@@ -50,7 +50,7 @@ with col2:
 #####################################################
 with st.expander("Plot View Options", expanded=True):
     show_labels = st.checkbox("Tree IDs", value=True)
-    show_dendro = st.checkbox("Show dendrometers and not drendrometers", value=False)
+    show_dendro = st.checkbox("Show dendrometers and not drendrometers (in orange)", value=False)
     st.download_button("Download plot as csv", data=df_plot.to_csv(index=False), file_name=f"plot_{plot_id}.csv")
 
 
