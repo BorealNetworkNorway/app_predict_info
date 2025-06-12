@@ -6,6 +6,7 @@ import os
 import folium
 from PIL import Image
 from streamlit_folium import st_folium
+import plotly.express as px
 
 st.set_page_config(page_title="Plot Details", layout="wide")
 
