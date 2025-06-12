@@ -88,10 +88,26 @@ with col2 :
         st.dataframe(dendro_df)
     else : 
         st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
+
+    
     st.markdown("---")
     st.subheader("Tree Species Composition")
-    plot_df = data_by_plot[plot_id]
-    composition
+    df_plot = data_by_plot[plot_id]
+    species_percent_df = get_species_composition(df_plot)
+    
+    if not species_percent_df.empty:
+        # Affichage du tableau
+        st.dataframe(species_percent_df, hide_index=True, use_container_width=True)
+    
+        # Affichage du camembert avec Plotly
+        fig = px.pie(species_percent_df,
+                     names="Species",
+                     values="Percentage",
+                     title="Tree Species Distribution (%)",
+                     color_discrete_sequence=px.colors.sequential.YlGn)
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.info("No species data available for this plot.")
 
 
 image_path = f"data/images/{plot_id}.jpg"
