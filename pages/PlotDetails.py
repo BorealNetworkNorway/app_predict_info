@@ -101,15 +101,31 @@ with col2 :
         st.dataframe(species_percent_df, hide_index=True, use_container_width=True)
     
         # Affichage du camembert avec Plotly
-        fig = px.pie(species_percent_df,
-                     names="Species",
-                     values="Percentage",
-                     title="Tree Species Distribution (%)",
-                     color_discrete_sequence=px.colors.sequential.YlGn)
+        # Définir les couleurs personnalisées
+        color_map = {
+            's': 'green',   # spruce
+            'p': 'orange',  # pine
+            # Couleurs par défaut pour d'autres espèces
+        }
+    
+        # Ajouter des couleurs aléatoires pour les espèces non définies
+        default_colors = px.colors.qualitative.Pastel + px.colors.qualitative.Bold
+        for species in species_composition_df["Species"]:
+            if species not in color_map:
+                color_map[species] = default_colors.pop(0)
+    
+        # Création du graphique
+        fig = px.pie(
+            species_composition_df,
+            names="Species",
+            values="Percentage",
+            title="Tree Species Composition (%)",
+            color="Species",
+            color_discrete_map=color_map
+        )
         st.plotly_chart(fig, use_container_width=True)
-    else:
-        st.info("No species data available for this plot.")
-
+else:
+    st.info("No species data available for this plot.")
 
 image_path = f"data/images/{plot_id}.jpg"
 if os.path.exists(image_path):
