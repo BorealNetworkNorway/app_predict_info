@@ -73,7 +73,7 @@ show_tree_map(df_plot, show_dendrometers=show_dendro, show_labels=show_labels)
 col1, col2 = st.columns(2)
 with col1 :
     
-    st.subheader("Tree Species Composition")
+    st.subheader("Species composition")
     df_plot = data_by_plot[plot_id]
     species_composition_df = get_species_composition(df_plot)
     
