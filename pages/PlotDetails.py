@@ -47,8 +47,7 @@ with col2:
         st_folium(local_map, width=800, height=400)
 
     st.markdown("---")
-    st.subheader("🌳 Tree Species Composition")
-    
+    st.subheader("Tree Species Composition")
     plot_df = data_by_plot[plot_id]
     composition
 
