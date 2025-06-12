@@ -1,7 +1,7 @@
 # PlotDetails.py
 
 import streamlit as st
-from utils import load_data, get_plot_metadata, show_tree_map, get_tree_info
+from utils import load_data, get_plot_metadata, show_tree_map, get_tree_info, get_species_composition
 import os
 import folium
 from PIL import Image
@@ -45,6 +45,13 @@ with col2:
         local_map = folium.Map(location=[lat, lon], zoom_start=14)
         folium.Marker([lat, lon], tooltip=f"Plot {plot_id}").add_to(local_map)
         st_folium(local_map, width=800, height=400)
+
+    st.markdown("---")
+    st.subheader("🌳 Tree Species Composition")
+    
+    plot_df = data_by_plot[plot_id]
+    composition
+
 #####################################################
 # Plot display options
 #####################################################
