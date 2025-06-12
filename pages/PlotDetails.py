@@ -46,10 +46,7 @@ with col2:
         folium.Marker([lat, lon], tooltip=f"Plot {plot_id}").add_to(local_map)
         st_folium(local_map, width=800, height=400)
 
-    st.markdown("---")
-    st.subheader("Tree Species Composition")
-    plot_df = data_by_plot[plot_id]
-    composition
+    
 
 #####################################################
 # Plot display options
@@ -91,7 +88,10 @@ with col2 :
         st.dataframe(dendro_df)
     else : 
         st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
-
+    st.markdown("---")
+    st.subheader("Tree Species Composition")
+    plot_df = data_by_plot[plot_id]
+    composition
 
 
 image_path = f"data/images/{plot_id}.jpg"
