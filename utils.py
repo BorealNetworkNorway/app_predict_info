@@ -134,12 +134,12 @@ def get_tree_info(df, tree_id):
 
 def get_species_composition(df_plot):
     """
-    Calcule la composition en pourcentage de chaque espèce d'arbre dans un plot.
+    Calcule the composition in percentage of each species in a plot.
     """
     if "species" not in df_plot.columns:
         return pd.DataFrame(columns=["Species", "Percentage"])
 
-    species_counts = df_plot["species"].value_counts(dropna=True)
+    species_counts = df_plot["species"].value_counts(dropna=False)
     total = species_counts.sum()
     species_percent = (species_counts / total * 100).round(2)
 
