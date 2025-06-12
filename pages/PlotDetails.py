@@ -72,26 +72,7 @@ show_tree_map(df_plot, show_dendrometers=show_dendro, show_labels=show_labels)
 #####################################################
 col1, col2 = st.columns(2)
 with col1 :
-    st.title("Search a tree")
-    tree_id = st.text_input("Enter tree_ID, pleaaaase")
-    if tree_id:
-        result = get_tree_info(df_plot, tree_id)
-        st.markdown("---")
-        if result is not None:
-            st.write(result)
-        else:
-            st.error("Tree not found")
-with col2 : 
-    df_plot["has_dendrometer"] = df_plot["dendrometer_id"].notna()
-    dendro_df = df_plot[df_plot["has_dendrometer"]][["tree_id", "dendrometer_id"]].dropna()
-    st.markdown("#### Trees with Dendrometers")
-    if not dendro_df.empty : 
-        st.dataframe(dendro_df)
-    else : 
-        st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
-
     
-    st.markdown("---")
     st.subheader("Tree Species Composition")
     df_plot = data_by_plot[plot_id]
     species_composition_df = get_species_composition(df_plot)
@@ -122,6 +103,28 @@ with col2 :
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("No species data available for this plot.")
+
+    st.markdown("---")
+    st.title("Search a tree")
+    tree_id = st.text_input("Enter tree_ID, pleaaaase")
+    if tree_id:
+        result = get_tree_info(df_plot, tree_id)
+        st.markdown("---")
+        if result is not None:
+            st.write(result)
+        else:
+            st.error("Tree not found")
+with col2 : 
+    df_plot["has_dendrometer"] = df_plot["dendrometer_id"].notna()
+    dendro_df = df_plot[df_plot["has_dendrometer"]][["tree_id", "dendrometer_id"]].dropna()
+    st.markdown("#### Trees with Dendrometers")
+    if not dendro_df.empty : 
+        st.dataframe(dendro_df)
+    else : 
+        st.write(f"Il est l'heure de creuser le sol et d'installer une boite !")
+
+    
+    
 
 image_path = f"data/images/{plot_id}.jpg"
 if os.path.exists(image_path):
