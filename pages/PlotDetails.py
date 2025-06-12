@@ -94,13 +94,9 @@ with col2 :
     st.markdown("---")
     st.subheader("Tree Species Composition")
     df_plot = data_by_plot[plot_id]
-    species_percent_df = get_species_composition(df_plot)
+    species_composition_df = get_species_composition(df_plot)
     
-    if not species_percent_df.empty:
-        # Affichage du tableau
-        st.dataframe(species_percent_df, hide_index=True, use_container_width=True)
-    
-        # Affichage du camembert avec Plotly
+    if not species_composition_df.empty:
         # Définir les couleurs personnalisées
         color_map = {
             's': 'green',   # spruce
@@ -124,8 +120,8 @@ with col2 :
             color_discrete_map=color_map
         )
         st.plotly_chart(fig, use_container_width=True)
-else:
-    st.info("No species data available for this plot.")
+    else:
+        st.info("No species data available for this plot.")
 
 image_path = f"data/images/{plot_id}.jpg"
 if os.path.exists(image_path):
