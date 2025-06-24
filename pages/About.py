@@ -28,7 +28,7 @@ st.markdown(
         <img src="{image_moni}" width="50%" alt="Overview of the monitoring design">
         <p><em>Overview of the monitoring design</em></p>
     </div>
-    """, unsafe_allow_html=True
+    """
 )
 
 st.markdown("""
