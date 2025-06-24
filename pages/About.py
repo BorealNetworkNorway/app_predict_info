@@ -18,7 +18,12 @@ Please contact aurore.dallery@insa-lyon.fr for any modifications/errors/bread_to
 **PREDICT** is a scientific project led by the Norwegian University of Life Sciences (NMBU).  
 It aims to study the impact of drought and increased temperatures on boreal forest ecosystems in Norway
 Learn more about the project [here](https://www.nmbu.no/en/research/projects/predict).
+""")
 
+st.markdown("### Monitoring Design")
+st.image("monotoring_design.jpg", caption="Overview of the monitoring design", use_column_width=True)
+
+st.markdown("""
 ---
 
 ### Data Sources
