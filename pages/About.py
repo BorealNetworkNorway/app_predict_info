@@ -20,7 +20,6 @@ It aims to study the impact of drought and increased temperatures on boreal fore
 Learn more about the project [here](https://www.nmbu.no/en/research/projects/predict).
 """)
 
-st.markdown("### Monitoring Design")
 image_moni = "data/images/monitoring_design.png"
 st.image(image_moni, caption="Overview of the monitoring design", width=600)
 
