@@ -72,7 +72,7 @@ st.markdown("<h1 style='text-align:center;'>Forest Plots Explorer</h1>", unsafe_
 #####################################################
 # Load data (here you can change the name of the sheet.)
 #####################################################
-excel_path = "data/predict_tree_inventory_v3.xlsx"
+excel_path = "data/predict_tree_inventory_final.xlsx"
 data_by_plot, metadata_df = load_data(excel_path)
 plot_ids = list(data_by_plot.keys())
 
