@@ -23,7 +23,8 @@ Learn more about the project [here](https://www.nmbu.no/en/research/projects/pre
 
 ### Data Sources
 - **Geological data**: Provided by [ngu.no](https://www.ngu.no/geologiske-kart)
-- **Mean temperature data**: Collected from [climatecharts.net](https://climatecharts.net)
+- **Mean temperature data**: Average temperatures (1990-2024) from seNorge_2018. 
+Lussana et al. seNorge_2018, daily precipitation, and temperature datasets over Norway, Earth Syst. Sci. Data, 11, 1531–1551, https://doi.org/10.5194/essd-11-1531-2019, 2019. 
 
 ---
 """)
