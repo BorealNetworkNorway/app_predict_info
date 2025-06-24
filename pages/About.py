@@ -21,7 +21,7 @@ Learn more about the project [here](https://www.nmbu.no/en/research/projects/pre
 """)
 
 st.markdown("### Monitoring Design")
-image_moni = f"data/images/monotoring_design.jpg"
+image_moni = f"data/images/monotoring_design.png"
 st.image(image_moni, caption="Overview of the monitoring design", use_column_width=True)
 
 st.markdown("""
