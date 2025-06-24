@@ -15,7 +15,7 @@ if "selected_plot" not in st.session_state:
     st.stop()
 
 plot_id = st.session_state["selected_plot"]
-data_by_plot, metadata_df = load_data("data/predict_tree_inventory_v3.xlsx")
+data_by_plot, metadata_df = load_data("data/predict_tree_inventory_final.xlsx")
 df_plot = data_by_plot[plot_id]
 meta = get_plot_metadata(metadata_df, plot_id)
 
