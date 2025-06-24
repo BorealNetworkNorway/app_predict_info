@@ -130,4 +130,8 @@ image_path = f"data/images/{plot_id}.jpg"
 if os.path.exists(image_path):
       image = Image.open(image_path)
       st.image(image, caption=f"Photo of plot {plot_id}", use_container_width=True)
+image_path_2 = f"data/images/{plot_id}.png"
+if os.path.exists(image_path):
+      image = Image.open(image_path)
+      st.image(image, caption=f"Photo of plot {plot_id}", use_container_width=True)
 
