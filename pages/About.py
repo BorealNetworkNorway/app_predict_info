@@ -22,14 +22,8 @@ Learn more about the project [here](https://www.nmbu.no/en/research/projects/pre
 
 st.markdown("### Monitoring Design")
 image_moni = "data/images/monitoring_design.png"
-st.markdown(
-    f"""
-    <div style='text-align: center;'>
-        <img src="{image_moni}" width="50%" alt="Overview of the monitoring design">
-        <p><em>Overview of the monitoring design</em></p>
-    </div>
-    """
-)
+st.image(image_moni, caption="Overview of the monitoring design", width=600)
+
 
 st.markdown("""
 ---
