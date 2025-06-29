@@ -19,7 +19,7 @@ st.markdown("""
 
     /* Header styling */
     h1 {
-        color: #2e7d32;
+        color: 'white';
         font-size: 2.8em;
         font-weight: 600;
         border-bottom: 2px solid #81c784;
